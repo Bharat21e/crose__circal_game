@@ -18,6 +18,8 @@ const NAMES: Record<Mark, string> = { cross: "Cross", circle: "Circle" };
 const empty = (): Cell[] => Array(9).fill(null);
 
 export default function Game() {
+  let status
+  let draw
   const [mode, setMode] = useState<Mode>("friend");
   const [board, setBoard] = useState<Cell[]>(empty);
   const [turn, setTurn] = useState<Mark>("cross");
@@ -25,7 +27,7 @@ export default function Game() {
   const [scores, setScores] = useState({ cross: 0, circle: 0, draws: 0 });
 
   const result = useMemo(() => getWinner(board), [board]);
-  const draw = !result && isFull(board);
+  draw = !result && isFull(board);
   const over = Boolean(result) || draw;
   const vsComputer = mode !== "friend";
   const computerThinking = vsComputer && turn === "circle" && !over;
@@ -34,6 +36,10 @@ export default function Game() {
   useEffect(() => {
     if (result) setScores((s) => ({ ...s, [result.mark]: s[result.mark] + 1 }));
     else if (draw) setScores((s) => ({ ...s, draws: s.draws + 1 }));
+    setTimeout(()=>{
+        nextRound()
+    },500)
+    
   }, [result, draw]);
 
   // Computer plays Circle.
@@ -55,6 +61,10 @@ export default function Game() {
     setTurn(other(turn));
   }
 
+  if(Boolean(status==" wins this round")||draw){
+     
+  }
+
   function nextRound() {
     const s = other(starter);
     setStarter(s);
@@ -70,13 +80,14 @@ export default function Game() {
     setTurn("cross");
   }
 
-  const status = result
+   status = result
     ? `${NAMES[result.mark]} wins this round`
     : draw
     ? "It's a draw"
     : computerThinking
     ? "Computer is thinking…"
     : `${NAMES[turn]}'s turn`;
+    
 
   const labels: Record<Mark, string> = {
     cross: vsComputer ? "You (Cross)" : "Cross",
@@ -85,8 +96,13 @@ export default function Game() {
 
   return (
     <section className="game">
-      <h1 className="title">Cross Circle</h1>
-
+      <div className="heading">
+         <h1 className="title">Cross Circle</h1>
+        <button className="btn" onClick={() => changeMode(mode)}>
+          Reset scores
+        </button>
+      </div>
+     
       <div className="modes" role="group" aria-label="Game mode">
         {(
           [
@@ -143,14 +159,13 @@ export default function Game() {
         })}
       </div>
 
-      <div className="actions">
-        <button className="btn btn-main" onClick={nextRound}>
+      {/* <div className="actions">
+         <button className="btn btn-main" onClick={nextRound}>
           {over ? "Play next round" : "Restart round"}
-        </button>
-        <button className="btn" onClick={() => changeMode(mode)}>
-          Reset scores
-        </button>
-      </div>
+        </button> 
+        
+       
+      </div> */}
     </section>
   );
 }

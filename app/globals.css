@@ -38,11 +38,11 @@ body {
   margin: 0;
   font-size: clamp(2.4rem, 9vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.06em;
   line-height: 1;
 }
 
-.modes { display: flex; flex-wrap: wrap; gap: 8px; }
+.modes { display: flex; flex-wrap: wrap; gap: 26px; }
 
 .chip {
   font: inherit;
@@ -132,13 +132,15 @@ body {
 
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
-.actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
+.heading
+{
+   display: flex ;justify-content:space-around ;
+}
 .btn {
   font: inherit;
   font-weight: 700;
   padding: 12px 18px;
-  border-radius: 12px;
+  border-radius: 5px;
   border: 2px solid var(--ink);
   background: transparent;
   color: var(--ink);
