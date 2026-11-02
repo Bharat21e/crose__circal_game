@@ -14,4 +14,7 @@ export default function MarkIcon({ mark }: { mark: Mark }) {
       <circle cx="50" cy="50" r="28" pathLength={1} />
     </svg>
   );
+  
 }
+
+

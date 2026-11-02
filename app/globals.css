@@ -31,7 +31,7 @@ body {
   max-width: 440px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16.94px;
 }
 
 .title {
@@ -52,6 +52,9 @@ body {
 
 .chip {
   font: inherit;
+  font:message-box;
+  font:var(--board);
+  font:var(--tile-hover);
   font-size: clamp(0.68rem, 3.4vw, 0.9rem);  /* min, fluid, max */
   font-weight: 600;
   padding: 0.55em 1em;               /* em units: padding scales with font size */
@@ -64,7 +67,7 @@ body {
   flex: 0 1 auto;                    /* allowed to shrink */
   min-width: 0;
   white-space: nowrap;
-  overflow: hidden;
+  overflow:visible;
   text-overflow: ellipsis;           /* safety net on very narrow screens */
 }
 

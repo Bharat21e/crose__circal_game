@@ -1,9 +1,9 @@
-import Game from "@/components/Game";
+import PageContent from '@/components/PageContent';
 
 export default function Page() {
   return (
     <main className="page">
-      <Game />
+      <PageContent />
     </main>
   );
 }
